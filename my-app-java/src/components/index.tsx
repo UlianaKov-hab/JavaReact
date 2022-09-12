@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 import { UserItem } from "./home/types";
 
 // interface UserItem{
@@ -14,23 +15,32 @@ import { UserItem } from "./home/types";
 
 export const HomePage = () => {
 
-    const {list} =  useSelector((store: any) => store.user);
+    const {list, loading} =  useTypedSelector(store=>store.user)//useSelector((store: any) => store.user);
     console.log("list redux", list)
+    const dispatch =  useDispatch();
 
     // const[users, setUsers] = useState<Array<UserItem>>([]);
 
-    // useEffect(()=>{
-    //     console.log("Load data server");
-    //     axios.get<Array<UserItem>>("http://localhost:8080/")
-    //     .then(resp=> {
-    //         //console.log("Server result", resp);
-    //         setUsers(resp.data);
-    //     })
+    useEffect(()=>{
+        console.log("Load data server");
+        dispatch({
+            type: "GET_LIST_USER",
+            
+        })
+        axios.get<Array<UserItem>>("http://localhost:8080/")
+        .then(resp=> {
+            dispatch({
+                type: "GET_LIST_USER_SUCCESS",
+                payload: resp.data
+            })
+            //console.log("Server result", resp);
+            //setUsers(resp.data);
+        })
 
-    // }, [])
+    }, [])
     console.log("users", list);
 
-    const listUsers = list.map((item: any) =>(
+    const listUsers = list.map((item) =>(
         <tr key = {item.id}>
             <th>{item.id}</th>
             <td>{item.email}</td>
@@ -55,6 +65,7 @@ export const HomePage = () => {
                 </tr>
             </thead>
             <tbody>
+                {loading && <tr><td colSpan={4}>Loading ...</td></tr>}
                 {listUsers}
             </tbody>
             </table>

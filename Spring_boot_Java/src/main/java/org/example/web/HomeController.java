@@ -38,6 +38,12 @@ public class HomeController {
     public List<UserItemDTO> index()
     {
         List<UserItemDTO> users = mapper.usersItemDTO_List(userRepository.findAll());
+        try{
+            Thread.sleep(2000);
+        }
+        catch(Exception ex){
+            System.out.println(("Bad thread" + ex.getMessage()));
+        }
         return users;
     }
     @PostMapping("/create")
