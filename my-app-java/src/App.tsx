@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { HomePage } from './components';
+import { HomePage } from './components/home';
 import { Route, Routes } from 'react-router-dom';
 import { CreateUserPage } from './components/CreateUser';
 import { HomeLayout } from './components/containers/homeLayout';
