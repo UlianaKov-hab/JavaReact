@@ -77,10 +77,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Set permissions on endpoints
         http.authorizeRequests()
                 // Swagger endpoints must be publicly accessible
+                //.antMatchers("/").hasAuthority(Roles.Admin)
                 .antMatchers("/").permitAll()
                 .antMatchers("/create/").hasAuthority(Roles.Admin) //.hasAuthority(Roles.Admin)
                 .antMatchers("/static/**").permitAll() //.hasAuthority(Roles.Admin)
-                .antMatchers("/api/account/").permitAll()
+                .antMatchers("/api/account/**").permitAll()
                 .antMatchers(String.format("%s/**", restApiDocPath)).permitAll()
                 .antMatchers(String.format("%s/**", swaggerPath)).permitAll()
                 .antMatchers(String.format("%s/**", "/swagger-ui")).permitAll()

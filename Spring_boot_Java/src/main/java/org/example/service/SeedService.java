@@ -38,7 +38,7 @@ public class SeedService implements  SeedServiceInterface{
             //List<Role> roles= roleRepository.findAll();
             PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
             UserEntity user = new UserEntity();
-            user.setEmail("www@www");
+            user.setEmail("www@www.com");
             user.setPhone("1234567890");
             user.setPassword(encoder.encode("123456"));
 
