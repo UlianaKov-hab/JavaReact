@@ -23,17 +23,19 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserEntity user = userRepository.findByEmail(username);
-        if(user==null)
+        UserEntity user = userRepository.findByEmail(username); //шукаємо юзера в БД
+        if(user==null) //якщо немає, то exeption
             throw new UsernameNotFoundException("Email "+ username +" not found");
-        return new User(user.getEmail(), user.getPassword(), getAuthorities(user));
+                                                             //права юзера по ролі
+        return new User(user.getEmail(), user.getPassword(), getAuthorities(user)); // якщо є, то створюється новий юзер на основі того, що в БД
+    //юзер має email, password, і список ролей, які витягуються у методі нижче
     }
 
-    private static Collection<? extends GrantedAuthority> getAuthorities(UserEntity user) {
-        String [] userRoles = user.getRoles().stream()
+    private static Collection<? extends GrantedAuthority> getAuthorities(UserEntity user) { //метод приймає юзера
+        String [] userRoles = user.getRoles().stream()                                      //витягується списочок ролей, які є у юзера
                 .map((role) -> role.getName()).toArray(String []:: new);
-        Collection<GrantedAuthority> authorityCollections =
+        Collection<GrantedAuthority> authorityCollections =                               //створюється нова колекція authorityCollections
                 AuthorityUtils.createAuthorityList(userRoles);
-        return authorityCollections;
+        return authorityCollections;                                                       //повертається ця колекція
     }
 }

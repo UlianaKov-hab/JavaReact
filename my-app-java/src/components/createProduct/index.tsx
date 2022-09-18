@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { Form, FormikProvider, useFormik } from "formik";
-import { CropperDialog } from "../CreateUser/common/cropperDialog";
+import { CropperDialog } from "../common/cropperDialog";
 import { ICreateProduct } from "./types";
 
 const initialValues: ICreateProduct = { 

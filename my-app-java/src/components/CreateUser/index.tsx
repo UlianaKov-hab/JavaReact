@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Form, FormikProvider, useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import http from "../../http_common";
-import { CropperDialog } from "./common/cropperDialog";
+import { CropperDialog } from "../common/cropperDialog";
 import { IRegister } from "./types";
 import { RegisterSchema } from './validation';
 
@@ -52,7 +52,7 @@ export const CreateUserPage = () => {
          
     <div className="row">    
         <div className="offset-md-3 col-md-6">
-        <h1>Create User</h1>   
+        <h1>Додати користувача</h1>   
             <FormikProvider value={formik}>
                 <Form onSubmit={handleSubmit}>
                 <CropperDialog

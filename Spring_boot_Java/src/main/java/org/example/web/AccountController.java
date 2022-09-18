@@ -33,6 +33,7 @@ public class AccountController {
     @PostMapping("login")
     public ResponseEntity<LoginSuccessDTO> login(@RequestBody @Valid LoginDTO loginDTO) {
         try{
+
             LoginSuccessDTO loginUser = loginUser(loginDTO.getUsername(), loginDTO.getPassword());
             return  ResponseEntity.ok()
                     .body(loginUser);
@@ -42,6 +43,7 @@ public class AccountController {
     }
 
     private LoginSuccessDTO loginUser(String username, String password) throws BadCredentialsException {
+        //проводимо авторизацію користувача
         Authentication auth = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(username, password));
         User user = (User) auth.getPrincipal();

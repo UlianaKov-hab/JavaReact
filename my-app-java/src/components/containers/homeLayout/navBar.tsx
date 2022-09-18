@@ -1,12 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-// import { useSelector } from "react-redux";
-// import { store } from "../../../store";
-// import {AuthState} from '../../auth/store/types';
-// import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 const Navbar = () => {
-    // const { isAuth, user } = useTypedSelector((store)=>store.auth);
+  const { isAuth, user } = useTypedSelector((store)=>store.auth);
 
   return (
     <header>
@@ -33,8 +30,13 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-            </ul>
-            {/* {isAuth ? (
+              <li className="nav-item">
+                  <Link className="nav-link" to="/create">
+                    Додати користувача
+                  </Link>
+                </li>
+            </ul>            
+            {isAuth ? (
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <Link className="nav-link" to="/pofile">
@@ -48,7 +50,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               </ul>
-            ) : ( */}
+            ) : (
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">
@@ -56,12 +58,12 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/create">
-                    Додати користувача
+                  <Link className="nav-link" to="/register">
+                    Реєстрація
                   </Link>
                 </li>
               </ul>
-            {/* )} */}
+             )} 
           </div>
         </div>
       </nav>

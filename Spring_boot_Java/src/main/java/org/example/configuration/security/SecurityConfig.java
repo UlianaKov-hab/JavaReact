@@ -76,10 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Set permissions on endpoints
         http.authorizeRequests()
+                //тут встановлюються права доступу до визначених сторінок
                 // Swagger endpoints must be publicly accessible
                 //.antMatchers("/").hasAuthority(Roles.Admin)
-                .antMatchers("/").permitAll()
-                .antMatchers("/create/").hasAuthority(Roles.Admin) //.hasAuthority(Roles.Admin)
+                .antMatchers("/").permitAll()  //всі мають доступ
+                .antMatchers("/create/").hasAuthority(Roles.Admin) //.hasAuthority(Roles.Admin)  тільки Admin
                 .antMatchers("/static/**").permitAll() //.hasAuthority(Roles.Admin)
                 .antMatchers("/api/account/**").permitAll()
                 .antMatchers(String.format("%s/**", restApiDocPath)).permitAll()
@@ -87,8 +88,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(String.format("%s/**", "/swagger-ui")).permitAll()
                 .anyRequest().authenticated();
         // Add JWT token filter
-
-
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
     // Expose authentication manager bean
