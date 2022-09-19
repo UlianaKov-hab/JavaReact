@@ -1,6 +1,7 @@
 package org.example.web;
 
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.example.DTO.UserDTO.UserCreateDTO;
 import org.example.DTO.UserDTO.UserItemDTO;
 import org.example.mapper.ApplicationMapper;
 import org.example.repositories.UserRepository;
@@ -12,6 +13,8 @@ import org.example.storage.StorageService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -47,11 +50,13 @@ public class HomeController {
         return users;
     }
     @PostMapping("/create")
-    public String addUser(@RequestBody UserEntity user) {
+    public String addUser(@RequestBody UserCreateDTO user) {
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         String fileName = storageService.store(user.getImage());
-        user.setImage(fileName);
-        userRepository.save(user);
-        //users.add(user);
+        UserEntity userEntity = mapper.userCreateDtoToUserEntity(user);
+        userEntity.setImage(fileName);
+        userEntity.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(userEntity);
         return "Ok";
     }
 

@@ -13,8 +13,7 @@ export const HomeLayout = () => {
           <Outlet />
         </div>
       </main>
-      </GoogleReCaptchaProvider>
-      
+      </GoogleReCaptchaProvider>      
       </>
     )
         

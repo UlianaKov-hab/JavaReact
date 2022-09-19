@@ -3,13 +3,14 @@ package org.example.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+import org.example.DTO.UserDTO.UserCreateDTO;
 import org.example.DTO.UserDTO.UserItemDTO;
 import org.example.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-14T18:49:54+0300",
+    date = "2022-09-19T18:39:25+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 18.0.1.1 (Oracle Corporation)"
 )
 @Component
@@ -44,5 +45,22 @@ public class ApplicationMapperImpl implements ApplicationMapper {
         }
 
         return list;
+    }
+
+    @Override
+    public UserEntity userCreateDtoToUserEntity(UserCreateDTO user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        UserEntity userEntity = new UserEntity();
+
+        userEntity.setEmail( user.getEmail() );
+        userEntity.setPhone( user.getPhone() );
+        userEntity.setImage( user.getImage() );
+        userEntity.setPassword( user.getPassword() );
+        userEntity.setAge( user.getAge() );
+
+        return userEntity;
     }
 }
