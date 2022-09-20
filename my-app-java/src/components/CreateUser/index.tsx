@@ -6,6 +6,8 @@ import http from "../../http_common";
 import { CropperDialog } from "../common/cropperDialog";
 import { IRegister } from "./types";
 import { RegisterSchema } from './validation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialValues: IRegister = { 
     email: "",
@@ -17,6 +19,8 @@ const initialValues: IRegister = {
 };
 export const CreateUserPage = () => {
     const navigate = useNavigate();
+    const notify = () => toast.success("Користувача додано", {position: "bottom-center"});
+    
 
     const onHandleSubmit = async (values: IRegister) =>
    {
@@ -30,12 +34,13 @@ export const CreateUserPage = () => {
             };     
         //const response1 = await http.post(query, model);
         const result = await http.post<string>("create", model); 
-        console.log("Create user result", result.data);           
+        console.log("Create user result", result.data);   
+       
                        
        }catch(error){
            console.error("problem submit", error)
           }
-          navigate('/'); 
+        //   navigate('/'); 
     }
 
     const formik = useFormik({
@@ -53,7 +58,7 @@ export const CreateUserPage = () => {
     <div className="row">    
         <div className="offset-md-3 col-md-6">
         <h1>Додати користувача</h1>   
-            <FormikProvider value={formik}>
+            <FormikProvider value={formik} >
                 <Form onSubmit={handleSubmit}>
                 <CropperDialog
                     onChanged={setFieldValue}
@@ -122,9 +127,13 @@ export const CreateUserPage = () => {
                   />
                   {touched.password && errors.password && <div className="invalid-feedback">{errors.password}</div>}
             </div> 
-            <button type="submit" className="btn btn-primary" >
-              Create
-            </button>
+            <div>
+                <button type="submit" className="btn btn-primary" onClick={notify}>
+                    Додати
+                </button>
+                <ToastContainer />
+            </div>
+            
                 </Form>
 
             </FormikProvider>       
