@@ -17,7 +17,7 @@ export const RegisterPage = () => {
     const { executeRecaptcha } = useGoogleReCaptcha();
     const [bot, setBot] = useState<boolean>(false);
     const navigate = useNavigate();
-    const {RegisterUser} = useActions();
+    //const {RegisterUser} = useActions();
    
    const initialValues: IRegister = {       
         email: "",

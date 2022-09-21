@@ -1,9 +1,16 @@
+
 import classNames from "classnames";
 import { Form, FormikProvider, useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useActions } from "../../../hooks/useActions";
+import { LoginUser } from "./actions";
 import { ILogin } from "./types";
 import { LoginSchema } from "./validation";
 
 export const LoginPage = () => {
+    const {LoginUser} = useActions();
+
+    const navigator = useNavigate();
    
    const initialValues: ILogin = {       
        email:"",       
@@ -13,7 +20,12 @@ export const LoginPage = () => {
    const onHandleSubmit = async (values: ILogin) =>
    {
        console.log("Submit form", values);
-       
+       try{
+        await LoginUser(values);
+        navigator("/");
+       }catch(error){
+
+       }    
    }   
 
    const formik = useFormik({
@@ -62,10 +74,7 @@ export const LoginPage = () => {
                   {touched.password && errors.password && <div className="invalid-feedback">{errors.password}</div>}
             </div>
             
-            <button type="submit" className="btn btn-primary" disabled={!(dirty && isValid)}>
-                {/* <Link to="/">
-                Увійти
-                </Link> */}
+            <button type="submit" className="btn btn-primary" disabled={!(isValid)}>               
                 Увійти
             </button>            
           </Form>

@@ -4,6 +4,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 const Navbar = () => {
   const { isAuth, user } = useTypedSelector((store)=>store.auth);
+  
 
   return (
     <header>

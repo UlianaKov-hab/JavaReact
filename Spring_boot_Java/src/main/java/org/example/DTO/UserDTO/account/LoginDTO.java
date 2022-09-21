@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class LoginDTO {
     @NotNull(message = "Вкажіть пошту")
     @Email(message = "Пошту вказано некоректно")
-    private String username;
+    private String email;
     @NotNull(message = "Вкажіть пароль")
     private String password;
 
