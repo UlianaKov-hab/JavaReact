@@ -80,7 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Swagger endpoints must be publicly accessible
                 //.antMatchers("/").hasAuthority(Roles.Admin)
                 .antMatchers("/").permitAll()  //всі мають доступ
-                .antMatchers("/create/").hasAuthority(Roles.Admin) //.hasAuthority(Roles.Admin)  тільки Admin
+                .antMatchers("/create").permitAll() //.hasAuthority(Roles.Admin)  тільки Admin
+                .antMatchers("/files/**").permitAll() //.hasAuthority(Roles.Admin)  тільки Admin
                 .antMatchers("/static/**").permitAll() //.hasAuthority(Roles.Admin)
                 .antMatchers("/api/account/**").permitAll()
                 .antMatchers(String.format("%s/**", restApiDocPath)).permitAll()

@@ -7,7 +7,7 @@ const initialState: AuthState = {
 export const authReducer = (state=initialState, action: any) : AuthState => {
     switch(action.type)
     {
-        case AuthActionTypes.LOGIN_AUTH:
+        case AuthActionTypes.REGISTER_AUTH:
             return{
                 ...state,
                 isAuth: true,

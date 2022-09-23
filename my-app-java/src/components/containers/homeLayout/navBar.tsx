@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import http from "../../../http_common";
 
 const Navbar = () => {
-  const { isAuth, user } = useTypedSelector((store)=>store.auth);
-  
+  const { isAuth, user } = useTypedSelector((store)=>store.login);
+  const url = http.defaults.baseURL;
 
   return (
     <header>
@@ -41,8 +42,9 @@ const Navbar = () => {
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <Link className="nav-link" to="/pofile">
-                      <img src={user?.image} alt="фотка" width="32" style={{borderRadius: "50%"}}/>
-                   {user?.email}
+                      {/* <img src={user?.image} alt="фотка" width="32" style={{borderRadius: "50%"}}/> */}
+                      <img src={url+"files/32_"+user?.image} style={{borderRadius: "50%"}}/>
+                      {user?.email}
                   </Link>
                 </li>
                 <li className="nav-item">

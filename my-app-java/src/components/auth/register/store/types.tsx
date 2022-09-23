@@ -1,16 +1,18 @@
 export enum AuthActionTypes{
-    LOGIN_AUTH = "AUTH/LOGIN_AUTH",
-    REGISTER_SUCCESS = "AUTH/REGISTER_SUCCESS"
+    REGISTER_AUTH = "REGISTER_AUTH",
+    REGISTER_AUTH_SUCCESS = "REGISTER_AUTH_SUCCESS"
 }
 
-export interface IUser{
-    email: string,
+export interface IUserRegister{
+    email:string,
+    phone: string,
     image: string,
-    roles: string
+    password: string,
+    age: number
 }
 
 export interface AuthState {
-    user?: IUser,
+    user?: IUserRegister,
     isAuth: boolean
 }
 

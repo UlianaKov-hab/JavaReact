@@ -4,11 +4,12 @@ import { bindActionCreators } from 'redux';
 import * as LoginActions from '../components/auth/login/actions';
 import  ActionCreator  from '../store/action-creator';
 
-const actions = {
-    ...LoginActions
-}
+// const actions = {
+//     ...LoginActions
+// }
 
 export const useActions = () => {
     const dispatch = useDispatch();
-    return useMemo(()=> bindActionCreators(LoginActions, dispatch), [dispatch]);
+   // return useMemo(()=> bindActionCreators(LoginActions, dispatch), [dispatch]);
+    return useMemo(()=> bindActionCreators(ActionCreator, dispatch), [dispatch]);
 }

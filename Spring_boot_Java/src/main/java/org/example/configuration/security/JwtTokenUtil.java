@@ -23,9 +23,11 @@ public class JwtTokenUtil {
 
     //метод призначений для того, щоб для визначеного юзера зробити jwt token
     public String generateAccessToken(UserEntity user) {
+
         return Jwts.builder()
                 .setSubject(format("%s,%s", user.getId(), user.getEmail()))
-                .claim("username", user.getEmail())
+                .claim("email", user.getEmail())
+                .claim("image", user.getImage())
                 //.claim("roles", user.getUsername())
                 .setIssuer(jwtIssuer) //записуємо хто власник токена
                 .setIssuedAt(new Date())  //коли був створений токен

@@ -14,6 +14,6 @@ export interface IRegisterRequest extends IRegister {
 }
 
 export interface RegisterSuccessAction {
-    type: AuthActionTypes.REGISTER_SUCCESS,
+    type: AuthActionTypes.REGISTER_AUTH_SUCCESS,
     payload: string
 }
