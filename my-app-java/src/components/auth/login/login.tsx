@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Form, FormikProvider, useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
-import { LoginUser } from "./actions";
+import { LoginUser, ResetUser } from "./actions";
 import { ILogin } from "./types";
 import { LoginSchema } from "./validation";
 
@@ -27,6 +27,8 @@ export const LoginPage = () => {
 
        }    
    }   
+
+   
 
    const formik = useFormik({
        initialValues: initialValues,

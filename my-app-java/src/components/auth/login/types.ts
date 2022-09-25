@@ -1,6 +1,7 @@
 export enum AuthActionTypes {
     LOGIN_AUTH = "LOGIN_AUTH",
-    LOGIN_AUTH_SUCCESS = "LOGIN_AUTH_SUCCESS"
+    LOGIN_AUTH_SUCCESS = "LOGIN_AUTH_SUCCESS",
+    RESET_AUTH_USER = "RESET_AUTH_USER"
 };
 
 export interface ILogin {
@@ -34,4 +35,8 @@ export interface LoginAuthSuccessAction {
     payload: IUser
 }
 
-export type AuthAction = LoginAuthAction | LoginAuthSuccessAction;
+export interface ResetAction {
+    type: AuthActionTypes.RESET_AUTH_USER
+}
+
+export type AuthAction = LoginAuthAction | LoginAuthSuccessAction | ResetAction;

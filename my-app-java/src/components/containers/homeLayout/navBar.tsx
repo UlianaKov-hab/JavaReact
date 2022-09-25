@@ -1,12 +1,25 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import http from "../../../http_common";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { isAuth, user } = useTypedSelector((store)=>store.login);
   const url = http.defaults.baseURL;
+  const {ResetUser} = useActions();
+  const dispatch = useDispatch();  
 
+  useEffect(() => {
+   
+  }, []);  
+
+ const logoutHandler = async () => {
+    await ResetUser();
+ }
+ 
   return (
     <header>
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -48,7 +61,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/logout">
+                  <Link className="nav-link" to="/logout" onClick={logoutHandler}>
                     Вихід
                   </Link>
                 </li>
@@ -72,6 +85,10 @@ const Navbar = () => {
       </nav>
     </header>
   );
+};
+
+const logout = () => {
+  localStorage.removeItem("user");
 };
 
 export default Navbar;

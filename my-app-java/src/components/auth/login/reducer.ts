@@ -23,7 +23,10 @@ export const authLoginReducer = (state = initialState, action: AuthAction) : Aut
                 isAuth: true,
                 loading: false,
                 user: {...action.payload}
-            }
+            };
+        case AuthActionTypes.RESET_AUTH_USER:              
+            return  state=initialState
+            
     }
     return state;
 }

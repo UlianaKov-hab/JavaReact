@@ -2,7 +2,7 @@ import { IUser } from './../login/types';
 import  axios  from 'axios';
 import { Dispatch } from 'redux';
 import http_common from '../../../http_common';
-import { ILogin, AuthActionTypes, ILoginResponse, LoginAuthAction, LoginAuthSuccessAction } from './types';
+import { ILogin, AuthActionTypes, ILoginResponse, LoginAuthAction, LoginAuthSuccessAction, ResetAction } from './types';
 import jwt_decode from "jwt-decode";
 
 export const LoginUser = (data: ILogin) => 
@@ -27,6 +27,14 @@ export const LoginUser = (data: ILogin) =>
             return Promise.reject();
           }
     }
+
+export const ResetUser = () => async (dispatch: Dispatch<ResetAction>) =>{
+        dispatch({type: AuthActionTypes.RESET_AUTH_USER});
+        return Promise.resolve();
+    }  
+    
+          
+
 
 
 const setAuthToken = (token:string) => {
