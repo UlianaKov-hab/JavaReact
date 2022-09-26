@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +31,7 @@ public class AccountController {
     private final UserRepository userRepository;
 
     @PostMapping("login")
-    public ResponseEntity<LoginSuccessDTO> login(@RequestBody @Valid LoginDTO loginDTO) {
+    public ResponseEntity<LoginSuccessDTO> login(@RequestBody LoginDTO loginDTO) {     //@Valid
         try{
             LoginSuccessDTO loginUser = loginUser(loginDTO.getEmail(), loginDTO.getPassword());
             return  ResponseEntity.ok()

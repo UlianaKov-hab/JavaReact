@@ -1,5 +1,6 @@
 package org.example.web;
 
+import io.swagger.annotations.Api;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.example.DTO.UserDTO.UserCreateDTO;
 import org.example.DTO.UserDTO.UserItemDTO;
@@ -20,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Path;
+//import javax.validation.Path;
 import java.io.FileOutputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -30,6 +31,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Api(tags = "Користувачі")
 public class HomeController {
     private final StorageService storageService;
 
