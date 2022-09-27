@@ -84,10 +84,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/files/**").permitAll() //.hasAuthority(Roles.Admin)  тільки Admin
                 .antMatchers("/static/**").permitAll() //.hasAuthority(Roles.Admin)
                 .antMatchers("/api/account/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/v2/api-docs").permitAll()
-                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()    // відкриваємо
+                .antMatchers("/swagger-ui.html").permitAll()           //           доступи
+                .antMatchers("/v2/api-docs").permitAll()                 //                 до
+                .antMatchers("/webjars/**").permitAll()                    //                   swagger
                 .antMatchers(String.format("%s/**", restApiDocPath)).permitAll()
                 .antMatchers(String.format("%s/**", swaggerPath)).permitAll()
                 .antMatchers(String.format("%s/**", "/swagger-ui")).permitAll()

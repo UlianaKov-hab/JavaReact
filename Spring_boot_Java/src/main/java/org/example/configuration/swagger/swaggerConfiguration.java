@@ -17,7 +17,7 @@ import java.util.List;
 public class swaggerConfiguration {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
-
+    //налаштовуємо bean-компонент API Docket щоб він містив інформацію про API, контексти бузпеки та схеми безпеки
     private ApiInfo apiInfo() {
         return new ApiInfo("My REST API",
                 "Some custom description of API.",
@@ -40,11 +40,12 @@ public class swaggerConfiguration {
                 .paths(PathSelectors.any())
                 .build();
     }
-
+//додаємо ApiKey щоб включити JWT в заголовок авторизації
     private ApiKey apiKey() {
         return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
     }
 
+    //налаштовуємо JWT SecurityContext з глобальною AuthorizationScope
     private SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(defaultAuth())
