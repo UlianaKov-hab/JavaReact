@@ -14,5 +14,5 @@ public class LoginDTO {
     private String email;
 //    @NotNull(message = "Вкажіть пароль")
     private String password;
-
+    private String recaptchaToken;
 }

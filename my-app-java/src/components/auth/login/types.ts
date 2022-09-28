@@ -9,6 +9,10 @@ export interface ILogin {
     password: string
 }
 
+export interface ILoginRequest extends ILogin { //до нашого запиту додаємо токен
+    recaptchaToken?: string
+}
+
 export interface ILoginResponse {
     token: string
 }

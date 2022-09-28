@@ -1,6 +1,8 @@
 package org.example.web;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.example.DTO.UserDTO.UserCreateDTO;
 import org.example.DTO.UserDTO.UserItemDTO;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.entities.UserEntity;
 import org.example.storage.StorageService;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -32,7 +35,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "Користувачі")
-public class HomeController {
+public class    HomeController {
     private final StorageService storageService;
 
     //private static List<User> users = new ArrayList<>();
@@ -51,8 +54,16 @@ public class HomeController {
         }
         return users;
     }
+//    @RequestMapping(
+//            method = RequestMethod.POST,
+//            value = "/create",
+//            produces = "application/json; charset=UTF-8")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @ResponseBody
+//    @ApiOperation(value = "Create user",
+//            notes = "This method creates a new user")
     @PostMapping("/create")
-    public String addUser(@RequestBody UserCreateDTO user) {
+    public String addUser( @RequestBody UserCreateDTO user) {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         String fileName = storageService.store(user.getImage());
         UserEntity userEntity = mapper.userCreateDtoToUserEntity(user);

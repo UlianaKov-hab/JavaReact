@@ -60,4 +60,6 @@ public class swaggerConfiguration {
         return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
     }
 
+
+
 }

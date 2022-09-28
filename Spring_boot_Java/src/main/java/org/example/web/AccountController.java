@@ -1,6 +1,11 @@
 package org.example.web;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.example.configuration.captcha.CaptchaSettings;
+import org.example.configuration.captcha.GoogleResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.example.DTO.UserDTO.account.LoginDTO;
 import org.example.DTO.UserDTO.account.LoginSuccessDTO;
@@ -14,10 +19,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestOperations;
 
 //import javax.validation.Valid;
 
@@ -29,10 +32,41 @@ public class AccountController {
     private final AuthenticationManager authenticationManager;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final CaptchaSettings captchaSettings;
+    @Autowired
+    private final RestOperations restTemplate;
+    protected static final String RECAPTCHA_URL_TEMPLATE = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
 
+//    @RequestMapping(
+//            method = RequestMethod.POST,
+//            value = "/login",
+//            produces = "application/json; charset=UTF-8")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @ResponseBody
+//    @ApiOperation(value = "Login user",
+//            notes = "This method login user")
+
+//    @ApiParam(
+//            name =  "email",
+//            type = "String",
+//            value = "Email",
+//            example = "ooo.kov@gmail.com",
+//            required = true)
     @PostMapping("login")
     public ResponseEntity<LoginSuccessDTO> login(@RequestBody LoginDTO loginDTO) {     //@Valid
         try{
+            String url = String.format(RECAPTCHA_URL_TEMPLATE, captchaSettings.getSecretkey(), loginDTO.getRecaptchaToken());
+            try {
+                final GoogleResponse googleResponse = restTemplate.getForObject(url, GoogleResponse.class);
+                if (!googleResponse.isSuccess()) {
+                    throw new Exception("reCaptcha was not successfully validated");
+                }
+            }
+            catch (Exception rce) {
+                String str = rce.getMessage();
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
             LoginSuccessDTO loginUser = loginUser(loginDTO.getEmail(), loginDTO.getPassword());
             return  ResponseEntity.ok()
                     .body(loginUser);
