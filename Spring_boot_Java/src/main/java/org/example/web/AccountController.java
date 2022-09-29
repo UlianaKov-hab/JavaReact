@@ -54,11 +54,14 @@ public class AccountController {
 //            required = true)
     @PostMapping("login")
     public ResponseEntity<LoginSuccessDTO> login(@RequestBody LoginDTO loginDTO) {     //@Valid
+
         try{
+            //в url записуємо токен, що нам прийшов
             String url = String.format(RECAPTCHA_URL_TEMPLATE, captchaSettings.getSecretkey(), loginDTO.getRecaptchaToken());
             try {
+                //посилаємо запит на сервер
                 final GoogleResponse googleResponse = restTemplate.getForObject(url, GoogleResponse.class);
-                if (!googleResponse.isSuccess()) {
+                if (!googleResponse.isSuccess()) {   //перевіряємо чи запит успішний
                     throw new Exception("reCaptcha was not successfully validated");
                 }
             }
