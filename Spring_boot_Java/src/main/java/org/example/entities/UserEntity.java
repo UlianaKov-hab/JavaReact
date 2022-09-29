@@ -38,4 +38,6 @@ public class UserEntity {
         this.email = name;
         roles = new ArrayList<RoleEntity>();
     }
+    @OneToMany(mappedBy = "user")
+    private List<OrderEntity> products;
 }
