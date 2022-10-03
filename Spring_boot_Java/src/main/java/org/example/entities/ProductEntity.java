@@ -15,24 +15,27 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(length = 200, nullable = false)
+    @Column(length = 255, nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private int price;
 
-    @Column(length = 200, nullable = false)
+    private double price;
+
+    @Column(length = 4000, nullable = false)
     private String description;
 
     @OneToMany(mappedBy = "product")
-    private List<ImageEntity> images;
+    private List<ProductImageEntity> images;
 
     @ManyToOne
     @JoinColumn(name="category_id", nullable = false)
     private CategoryEntity category;
 
-    @ManyToMany(mappedBy = "products")
-    private List<CartEntity> carts = new ArrayList<CartEntity>();
+    @OneToMany(mappedBy = "product")
+    private List<OrderItemEntity> orderItems;
+
+    @OneToMany(mappedBy = "basketId.product")
+    private List<BasketEntity> basket;
 
 }
 

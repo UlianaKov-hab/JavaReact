@@ -39,5 +39,9 @@ public class UserEntity {
         roles = new ArrayList<RoleEntity>();
     }
     @OneToMany(mappedBy = "user")
-    private List<OrderEntity> products;
+    private List<OrderEntity> orders;
+
+    @OneToMany(mappedBy = "basketId.user")
+    private List<BasketEntity> baskets;
+
 }
