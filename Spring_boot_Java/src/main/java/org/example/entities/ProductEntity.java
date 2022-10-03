@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name="tbl_products")
 public class ProductEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,9 +28,9 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product")
     private List<ProductImageEntity> images;
 
-    @ManyToOne
-    @JoinColumn(name="category_id", nullable = false)
-    private CategoryEntity category;
+//    @ManyToOne
+//    @JoinColumn(name="category_id", nullable = false)
+//    private CategoryEntity category;
 
     @OneToMany(mappedBy = "product")
     private List<OrderItemEntity> orderItems;
@@ -37,6 +38,13 @@ public class ProductEntity {
     @OneToMany(mappedBy = "basketId.product")
     private List<BasketEntity> basket;
 
+    public ProductEntity() {
+    }
+    public ProductEntity(String name, double price, String description) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
 }
 
 

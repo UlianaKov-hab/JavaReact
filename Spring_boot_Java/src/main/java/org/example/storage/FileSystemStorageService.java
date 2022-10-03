@@ -42,8 +42,7 @@ public class FileSystemStorageService implements StorageService {
             {
                 Files.createDirectory(rootLocation);
             }
-            seedService.seedRoleData(); //перенести в Main
-            seedService.seedUserData(); //перенести в Main
+
 
         } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);

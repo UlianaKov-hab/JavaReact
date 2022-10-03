@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.service.SeedServiceInterface;
 import org.example.storage.StorageProperties;
 import org.example.storage.StorageService;
 import org.springframework.boot.CommandLineRunner;
@@ -16,14 +17,17 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
     @Bean
-    CommandLineRunner init(StorageService storageService) {
+    CommandLineRunner init(StorageService storageService, SeedServiceInterface seedService) {
         return (args) -> {
             //storageService.deleteAll();
             try {
                 storageService.init();
+                seedService.seedRoleData(); //перенести в Main
+                seedService.seedUserData(); //перенести в Main
+                seedService.seedProductData();
             }
             catch(Exception ex) {
-                System.out.println("----propblem cteate folder--------");
+                System.out.println("----propblem cteate folder--------" + ex.getMessage());
             }
         };
     }

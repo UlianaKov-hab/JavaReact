@@ -5,12 +5,14 @@ import java.util.List;
 import javax.annotation.Generated;
 import org.example.DTO.UserDTO.UserCreateDTO;
 import org.example.DTO.UserDTO.UserItemDTO;
+import org.example.DTO.product.ProductItemDTO;
+import org.example.entities.ProductEntity;
 import org.example.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-26T19:51:42+0300",
+    date = "2022-10-03T19:21:49+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 18.0.1.1 (Oracle Corporation)"
 )
 @Component
@@ -62,5 +64,33 @@ public class ApplicationMapperImpl implements ApplicationMapper {
         userEntity.setAge( user.getAge() );
 
         return userEntity;
+    }
+
+    @Override
+    public List<ProductItemDTO> productToProductItemDTO_List(List<ProductEntity> products) {
+        if ( products == null ) {
+            return null;
+        }
+
+        List<ProductItemDTO> list = new ArrayList<ProductItemDTO>( products.size() );
+        for ( ProductEntity productEntity : products ) {
+            list.add( productEntityToProductItemDTO( productEntity ) );
+        }
+
+        return list;
+    }
+
+    protected ProductItemDTO productEntityToProductItemDTO(ProductEntity productEntity) {
+        if ( productEntity == null ) {
+            return null;
+        }
+
+        ProductItemDTO productItemDTO = new ProductItemDTO();
+
+        productItemDTO.setId( productEntity.getId() );
+        productItemDTO.setName( productEntity.getName() );
+        productItemDTO.setPrice( productEntity.getPrice() );
+
+        return productItemDTO;
     }
 }
