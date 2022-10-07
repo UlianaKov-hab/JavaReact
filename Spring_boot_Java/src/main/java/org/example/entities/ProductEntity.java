@@ -19,7 +19,6 @@ public class ProductEntity {
     @Column(length = 255, nullable = false)
     private String name;
 
-
     private double price;
 
     @Column(length = 4000, nullable = false)

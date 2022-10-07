@@ -38,7 +38,7 @@ public class UserEntity {
         this.email = name;
         roles = new ArrayList<RoleEntity>();
     }
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orders;
 
     @OneToMany(mappedBy = "basketId.user")

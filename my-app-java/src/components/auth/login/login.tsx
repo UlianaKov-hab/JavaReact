@@ -1,5 +1,5 @@
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3"
-import { LoginPage } from "./LogiPage"
+import { LoginPage } from "./LoginPage"
 
 export const Login = () => {
     return(

@@ -19,7 +19,7 @@ const Navbar = () => {
  const logoutHandler = async () => {
     await ResetUser();
  }
- 
+
   return (
     <header>
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -48,6 +48,11 @@ const Navbar = () => {
               <li className="nav-item">
                   <Link className="nav-link" to="/create">
                     Додати користувача
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/products/create">
+                    Додати продукт
                   </Link>
                 </li>
             </ul>            

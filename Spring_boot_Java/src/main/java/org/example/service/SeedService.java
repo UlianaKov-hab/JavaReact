@@ -2,20 +2,17 @@ package org.example.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.constants.Roles;
-import org.example.entities.ProductEntity;
-import org.example.entities.ProductImageEntity;
-import org.example.entities.RoleEntity;
-import org.example.entities.UserEntity;
-import org.example.repositories.ProductImageRepository;
-import org.example.repositories.ProductRepository;
-import org.example.repositories.RoleRepository;
-import org.example.repositories.UserRepository;
+import org.example.entities.*;
+import org.example.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,17 +20,22 @@ import java.util.List;
 public class SeedService implements  SeedServiceInterface{
     @Autowired
     RoleRepository roleRepository;
-
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     ProductRepository productRepository;
-
     @Autowired
     ProductImageRepository productImageRepository;
+    @Autowired
+    OrderRepository orderRepository;
+    @Autowired
+    OrderStatusRepository orderStatusRepository;
+    @Autowired
+    BasketRepository basketRepository;
 
-    @Override
+
+
+        @Override
     public void seedRoleData() {
         if (roleRepository.count() == 0) {
             RoleEntity role = new RoleEntity("admin");
@@ -82,5 +84,25 @@ public class SeedService implements  SeedServiceInterface{
 
         }
         System.out.println(productRepository.count());
+    }
+    @Override
+    public void seedOrderData() {
+        if (orderRepository.count() == 0) {
+            Date date = new Date(2022, 9, 10, 10, 10, 00 );
+            OrderStatusEntity orderStatusEntity = new OrderStatusEntity("finished");
+            orderStatusRepository.save(orderStatusEntity);
+            UserEntity user = new UserEntity("ooo@kov.gmail.com");
+//            OrderEntity order = new OrderEntity(currentDate, user, orderStatusEntity);
+            OrderEntity order = new OrderEntity();
+            order.setDateCreated(date);
+            order.setUser(user);
+            order.setStatus(orderStatusEntity);
+            orderRepository.save(order);
+        }
+        System.out.println(productRepository.count());
+    }
+    @Override
+    public void seedBasketData(){
+
     }
 }

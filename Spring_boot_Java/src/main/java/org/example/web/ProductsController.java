@@ -6,17 +6,20 @@ import org.example.DTO.product.ProductItemDTO;
 import org.example.mapper.ApplicationMapper;
 import org.example.repositories.ProductRepository;
 import org.example.storage.StorageService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "Продукти")
+@RequestMapping(path="api/products")
 public class ProductsController {
     private final ProductRepository productRepository;
     private final ApplicationMapper mapper;
+
+    private final StorageService storageService;
 
     @GetMapping("list")
     public List<ProductItemDTO> index() {
@@ -24,5 +27,9 @@ public class ProductsController {
         return products;
     }
 
-
+    @PostMapping("upload")
+    public String handleFileUpload(@RequestParam("productimage") MultipartFile file) {
+        storageService.store(file);
+        return "ok";
+    }
 }

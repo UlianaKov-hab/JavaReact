@@ -1,5 +1,6 @@
 package org.example;
 
+
 import org.example.service.SeedServiceInterface;
 import org.example.storage.StorageProperties;
 import org.example.storage.StorageService;
@@ -25,6 +26,7 @@ public class Main {
                 seedService.seedRoleData(); //перенести в Main
                 seedService.seedUserData(); //перенести в Main
                 seedService.seedProductData();
+                //seedService.seedOrderData();
             }
             catch(Exception ex) {
                 System.out.println("----propblem cteate folder--------" + ex.getMessage());

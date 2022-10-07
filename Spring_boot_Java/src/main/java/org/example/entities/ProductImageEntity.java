@@ -14,11 +14,9 @@ public class ProductImageEntity {
 
     @Column(length = 255, nullable = false)
     private String name;
-
     private int priority;
-
-    @ManyToOne
-    @JoinColumn(name="product_id", nullable = false)
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="product_id", nullable = true)
     private ProductEntity product;
 
     public ProductImageEntity (){

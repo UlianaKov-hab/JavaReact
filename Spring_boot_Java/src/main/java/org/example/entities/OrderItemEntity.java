@@ -13,7 +13,6 @@ public class OrderItemEntity {
     private int id;
     private double priceBuy;
     private int count;
-
     @ManyToOne
     @JoinColumn(name="product_id", nullable = false)
     private ProductEntity product;
@@ -21,5 +20,12 @@ public class OrderItemEntity {
     @ManyToOne
     @JoinColumn(name="order_id", nullable = false)
     private OrderEntity order;
-
+    public OrderItemEntity() {
+    }
+    public OrderItemEntity(double priceBuy, int count, ProductEntity product, OrderEntity order) {
+        this.priceBuy = priceBuy;
+        this.count = count;
+        this.product = product;
+        this.order = order;
+    }
 }

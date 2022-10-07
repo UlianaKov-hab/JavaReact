@@ -1,7 +1,5 @@
 package org.example.storage;
 
-//import org.example.service.RoleDataLoader;
-import org.example.service.SeedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -25,10 +23,6 @@ import java.util.stream.Stream;
 public class FileSystemStorageService implements StorageService {
 
     private final Path rootLocation;
-    //public RoleDataLoader roleDataLoader;
-
-    @Autowired
-    SeedService seedService;
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
@@ -42,24 +36,22 @@ public class FileSystemStorageService implements StorageService {
             {
                 Files.createDirectory(rootLocation);
             }
-
-
         } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
     }
 
-//    @Override
-//    public void store(MultipartFile file) {
-//        try {
-//            if (file.isEmpty()) {
-//                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
-//            }
-//            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
-//        } catch (IOException e) {
-//            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
-//        }
-//    }
+    @Override
+    public void store(MultipartFile file) {
+        try {
+            if (file.isEmpty()) {
+                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
+            }
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+        } catch (IOException e) {
+            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
+        }
+    }
 
     @Override
     public Stream<Path> loadAll() {

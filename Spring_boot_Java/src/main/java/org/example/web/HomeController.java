@@ -114,20 +114,7 @@ public class    HomeController {
         return ResponseEntity.ok()
                 //.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
                 .contentType(MediaType.IMAGE_JPEG)
-
                 .header(HttpHeaders.CONTENT_DISPOSITION,"filename=\""+urlFileName+"\"")
                 .body(file);
     }
-
-//    @PostMapping("/uploaded")
-//    public String handleFileUpload(@RequestParam("file") MultipartFile file,
-//                                   RedirectAttributes redirectAttributes) {
-//        storageService.store(file);
-//        redirectAttributes.addFlashAttribute("message",
-//                "You successfully uploaded " + file.getOriginalFilename() + "!");
-//
-//        return "redirect:/";
-//    }
-
-
 }

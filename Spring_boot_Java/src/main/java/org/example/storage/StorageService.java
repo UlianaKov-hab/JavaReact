@@ -9,12 +9,11 @@ import java.util.stream.Stream;
 
 public interface StorageService {
     void init();
-//    void store(MultipartFile file);
+    void store(MultipartFile file);
     Stream<Path> loadAll();
     Path load(String filename);
     String store(String base64);
     Resource loadAsResource(String filename);
     void deleteAll();
     void  removeFile(String removeFile);
-    //void seedUsersTable();
 }

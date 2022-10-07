@@ -10,10 +10,12 @@ import java.util.List;
 @Entity
 @Table(name="tbl_baskets")
 public class BasketEntity {
-
     private int count;
     @EmbeddedId
     private BasketId basketId;
-
-
+    public BasketEntity() {
+    }
+    public BasketEntity(int count) {
+        this.count = count;
+    }
 }
