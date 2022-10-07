@@ -1,5 +1,6 @@
 package org.example.storage;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -42,12 +43,15 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public String store(MultipartFile file) {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+            String fileName = UUID.randomUUID().toString()+"."+extension; //генеруємо унікальне ім'я
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName));
+            return fileName;
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }

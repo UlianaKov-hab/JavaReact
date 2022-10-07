@@ -26,4 +26,8 @@ public class ProductImageEntity {
         this.priority = priority;
         this.product = product;
     }
+    public ProductImageEntity(String name, int priority ) {
+        this.name = name;
+        this.priority = priority;
+    }
 }
