@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { HomePage } from './components/home';
 import { Route, Routes } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { HomeLayout } from './components/containers/homeLayout';
 import { RegisterPage } from './components/auth/register/register';
 import { Login } from './components/auth/login/login';
 import { UserProfilePage } from './components/profile/ProfileUser';
-import { ProductCreatePage } from './components/products';
+import { ProductCreatePage } from './components/products/create';
 
 
 function App() {
