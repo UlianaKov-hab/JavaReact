@@ -22,6 +22,10 @@ public class OrderItemEntity {
     private OrderEntity order;
     public OrderItemEntity() {
     }
+    public OrderItemEntity(double priceBuy, int count) {
+        this.priceBuy = priceBuy;
+        this.count = count;
+    }
     public OrderItemEntity(double priceBuy, int count, ProductEntity product, OrderEntity order) {
         this.priceBuy = priceBuy;
         this.count = count;

@@ -68,7 +68,7 @@ public class    HomeController {
 //    @ApiOperation(value = "Create user",
 //            notes = "This method creates a new user")
     @PostMapping("/create")
-    public String addUser( @RequestBody UserCreateDTO user) {
+    public String addUser(@RequestBody UserCreateDTO user) {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         String fileName = storageService.store(user.getImage());
         UserEntity userEntity = mapper.userCreateDtoToUserEntity(user);

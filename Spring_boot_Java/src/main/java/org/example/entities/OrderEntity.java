@@ -20,7 +20,8 @@ public class OrderEntity {
     private Date dateCreated;
 
     @ManyToOne
-//    @Cascade(CascadeType.SAVE_UPDATE)
+            //(cascade = CascadeType.ALL)
+
     @JoinColumn(name="user_id", nullable = false)
     private UserEntity user;
 
@@ -39,6 +40,9 @@ public class OrderEntity {
         this.dateCreated = dateCreated;
         this.user = user;
         this.status = status;
+    }
+    public OrderEntity(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
 

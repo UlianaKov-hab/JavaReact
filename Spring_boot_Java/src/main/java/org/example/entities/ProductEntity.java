@@ -35,7 +35,7 @@ public class ProductEntity {
     private List<OrderItemEntity> orderItems;
 
     @OneToMany(mappedBy = "basketId.product")
-    private List<BasketEntity> basket;
+    private List<BasketEntity> baskets;
 
     public ProductEntity() {
     }

@@ -7,6 +7,7 @@ import { IProductImageSave } from "./types";
 import { ICreatorProduct } from "./types";
 
 
+
 const initialValues: ICreatorProduct = { 
   name: "", 
   price: 0,
@@ -61,7 +62,7 @@ export const ProductCreatePage = () => {
       }
 
       const listImages = images.map((item) =>(
-        <img key = {item.id} src={"http://localhost:8080/files/"+item.fileName} width="100"/>    
+        <img className="box" key = {item.id} src={"http://localhost:8080/files/"+item.fileName} width="100" draggable="true"/>    
     ));
 
     const formik = useFormik({
@@ -79,14 +80,14 @@ export const ProductCreatePage = () => {
             <h1>Додати продукт</h1>
             <FormikProvider value={formik} >
               <Form onSubmit={handleSubmit}>                
-                <div className="mb-3">
+                <div className="mb-3 " style={{cursor:"grab"}}  >
                   {listImages}
                   <label htmlFor="files">                    
                     Оберіть фото                                  
                   </label>
                   <input type="file" multiple accept="imageg/jpeg, image/png, image/jpg"
                   style={{display:"none"}}
-                  id="files" name="files"
+                  id="files" name="files"                  
                    onChange={handleSelectImage}/>
                 </div>
             

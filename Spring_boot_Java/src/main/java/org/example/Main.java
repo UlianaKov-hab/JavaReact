@@ -23,10 +23,11 @@ public class Main {
             //storageService.deleteAll();
             try {
                 storageService.init();
-                seedService.seedRoleData(); //перенести в Main
-                seedService.seedUserData(); //перенести в Main
-                seedService.seedProductData();
-                //seedService.seedOrderData();
+//                seedService.seedRoleData(); //перенести в Main
+//                seedService.seedUserData(); //перенести в Main
+//                seedService.seedProductData();
+//                seedService.seedOrderData();
+                seedService.seedData();
             }
             catch(Exception ex) {
                 System.out.println("----propblem cteate folder--------" + ex.getMessage());
